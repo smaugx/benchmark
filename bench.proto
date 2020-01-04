@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package bench.protobuf;
+
+
+message GossipParams {
+    optional uint32           neighber_count  = 1;
+    optional uint32           stop_times      = 2;
+    optional int32            gossip_type     = 3;
+    optional uint32           max_hop_num     = 4;
+    optional bytes            header_hash     = 5;
+    optional bytes            block           = 6;
+    optional uint32           msg_hash        = 7;
+    optional bool             allow_up        = 8;
+    optional bool             allow_low       = 9;
+}
+
+
+message RoutingMessage {
+    optional bytes            src_node_id     = 1;
+    optional bytes            des_node_id     = 2;
+    optional int32            type            = 3;
+    optional bytes            data            = 4;
+    optional uint32           id              = 5;
+    optional uint32           hop_num         = 6;
+    optional bool             is_root         = 7;
+    repeated uint64           bloomfilter     = 8;
+    optional bool             broadcast       = 9;
+    optional uint32           priority        = 10;
+    optional GossipParams     gossip          = 11;
+}
