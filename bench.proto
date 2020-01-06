@@ -6,7 +6,7 @@ package bench.protobuf;
 message GossipParams {
     optional uint32           neighber_count  = 1;
     optional uint32           stop_times      = 2;
-    optional int32            gossip_type     = 3;
+    optional uint32           gossip_type     = 3;
     optional uint32           max_hop_num     = 4;
     optional bytes            header_hash     = 5;
     optional bytes            block           = 6;
@@ -19,7 +19,7 @@ message GossipParams {
 message RoutingMessage {
     optional bytes            src_node_id     = 1;
     optional bytes            des_node_id     = 2;
-    optional int32            type            = 3;
+    optional uint32           type            = 3;
     optional bytes            data            = 4;
     optional uint32           id              = 5;
     optional uint32           hop_num         = 6;
@@ -28,4 +28,27 @@ message RoutingMessage {
     optional bool             broadcast       = 9;
     optional uint32           priority        = 10;
     optional GossipParams     gossip          = 11;
+}
+
+
+// delete some field and add some field
+message RoutingMessage_Add_Delete_Fields {
+    optional bytes            src_node_id     = 1;
+    optional bytes            des_node_id     = 2;
+    optional uint32           type            = 3;
+    // delete
+    //optional bytes            data            = 4;
+    optional uint32           id              = 5;
+    optional uint32           hop_num         = 6;
+    // delete
+    //optional bool             is_root         = 7;
+    repeated uint64           bloomfilter     = 8;
+    optional bool             broadcast       = 9;
+    optional uint32           priority        = 10;
+    optional GossipParams     gossip          = 11;
+
+    // add
+    optional uint32           add_field1      = 12;
+    optional bytes            add_field2      = 13;
+
 }

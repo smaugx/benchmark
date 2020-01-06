@@ -26,10 +26,10 @@ LDLIBS_THIRD=-L ./third_party/lib -lprotobuf -lmsgpackc -lgflags
 LDLIBS=-lgcc -lstdc++ -lpthread -ldl
 
 %.o:%.cc
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INC_DIRS) $(INC_DIRS_THIRD) -c $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INC_DIRS) $(INC_DIRS_THIRD)  -c $<
 
 $(TARGET): $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) $(CPPFLAGS) -o $@  $(LDLIBS_THIRD) $(LDLIBS)
+	$(CXX) $(LDFLAGS) $(OBJS) $(CPPFLAGS) -o $@  $(LDLIBS_THIRD)  $(LDLIBS)
 
 .PHONY: clean
 

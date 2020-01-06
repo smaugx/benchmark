@@ -41,7 +41,7 @@ struct TableStruct_bench_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[2]
+  static const ::google::protobuf::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -56,12 +56,16 @@ extern GossipParamsDefaultTypeInternal _GossipParams_default_instance_;
 class RoutingMessage;
 class RoutingMessageDefaultTypeInternal;
 extern RoutingMessageDefaultTypeInternal _RoutingMessage_default_instance_;
+class RoutingMessage_Add_Delete_Fields;
+class RoutingMessage_Add_Delete_FieldsDefaultTypeInternal;
+extern RoutingMessage_Add_Delete_FieldsDefaultTypeInternal _RoutingMessage_Add_Delete_Fields_default_instance_;
 }  // namespace protobuf
 }  // namespace bench
 namespace google {
 namespace protobuf {
 template<> ::bench::protobuf::GossipParams* Arena::CreateMaybeMessage<::bench::protobuf::GossipParams>(Arena*);
 template<> ::bench::protobuf::RoutingMessage* Arena::CreateMaybeMessage<::bench::protobuf::RoutingMessage>(Arena*);
+template<> ::bench::protobuf::RoutingMessage_Add_Delete_Fields* Arena::CreateMaybeMessage<::bench::protobuf::RoutingMessage_Add_Delete_Fields>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace bench {
@@ -214,12 +218,12 @@ class GossipParams : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::uint32 stop_times() const;
   void set_stop_times(::google::protobuf::uint32 value);
 
-  // optional int32 gossip_type = 3;
+  // optional uint32 gossip_type = 3;
   bool has_gossip_type() const;
   void clear_gossip_type();
   static const int kGossipTypeFieldNumber = 3;
-  ::google::protobuf::int32 gossip_type() const;
-  void set_gossip_type(::google::protobuf::int32 value);
+  ::google::protobuf::uint32 gossip_type() const;
+  void set_gossip_type(::google::protobuf::uint32 value);
 
   // optional uint32 max_hop_num = 4;
   bool has_max_hop_num() const;
@@ -260,7 +264,7 @@ class GossipParams : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::ArenaStringPtr block_;
   ::google::protobuf::uint32 neighber_count_;
   ::google::protobuf::uint32 stop_times_;
-  ::google::protobuf::int32 gossip_type_;
+  ::google::protobuf::uint32 gossip_type_;
   ::google::protobuf::uint32 max_hop_num_;
   ::google::protobuf::uint32 msg_hash_;
   bool allow_up_;
@@ -436,12 +440,12 @@ class RoutingMessage : public ::google::protobuf::Message /* @@protoc_insertion_
   ::bench::protobuf::GossipParams* mutable_gossip();
   void set_allocated_gossip(::bench::protobuf::GossipParams* gossip);
 
-  // optional int32 type = 3;
+  // optional uint32 type = 3;
   bool has_type() const;
   void clear_type();
   static const int kTypeFieldNumber = 3;
-  ::google::protobuf::int32 type() const;
-  void set_type(::google::protobuf::int32 value);
+  ::google::protobuf::uint32 type() const;
+  void set_type(::google::protobuf::uint32 value);
 
   // optional uint32 id = 5;
   bool has_id() const;
@@ -490,12 +494,243 @@ class RoutingMessage : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr des_node_id_;
   ::google::protobuf::internal::ArenaStringPtr data_;
   ::bench::protobuf::GossipParams* gossip_;
-  ::google::protobuf::int32 type_;
+  ::google::protobuf::uint32 type_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 hop_num_;
   bool is_root_;
   bool broadcast_;
   ::google::protobuf::uint32 priority_;
+  friend struct ::TableStruct_bench_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RoutingMessage_Add_Delete_Fields : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:bench.protobuf.RoutingMessage_Add_Delete_Fields) */ {
+ public:
+  RoutingMessage_Add_Delete_Fields();
+  virtual ~RoutingMessage_Add_Delete_Fields();
+
+  RoutingMessage_Add_Delete_Fields(const RoutingMessage_Add_Delete_Fields& from);
+
+  inline RoutingMessage_Add_Delete_Fields& operator=(const RoutingMessage_Add_Delete_Fields& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RoutingMessage_Add_Delete_Fields(RoutingMessage_Add_Delete_Fields&& from) noexcept
+    : RoutingMessage_Add_Delete_Fields() {
+    *this = ::std::move(from);
+  }
+
+  inline RoutingMessage_Add_Delete_Fields& operator=(RoutingMessage_Add_Delete_Fields&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const RoutingMessage_Add_Delete_Fields& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RoutingMessage_Add_Delete_Fields* internal_default_instance() {
+    return reinterpret_cast<const RoutingMessage_Add_Delete_Fields*>(
+               &_RoutingMessage_Add_Delete_Fields_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(RoutingMessage_Add_Delete_Fields* other);
+  friend void swap(RoutingMessage_Add_Delete_Fields& a, RoutingMessage_Add_Delete_Fields& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RoutingMessage_Add_Delete_Fields* New() const final {
+    return CreateMaybeMessage<RoutingMessage_Add_Delete_Fields>(NULL);
+  }
+
+  RoutingMessage_Add_Delete_Fields* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<RoutingMessage_Add_Delete_Fields>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const RoutingMessage_Add_Delete_Fields& from);
+  void MergeFrom(const RoutingMessage_Add_Delete_Fields& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RoutingMessage_Add_Delete_Fields* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint64 bloomfilter = 8;
+  int bloomfilter_size() const;
+  void clear_bloomfilter();
+  static const int kBloomfilterFieldNumber = 8;
+  ::google::protobuf::uint64 bloomfilter(int index) const;
+  void set_bloomfilter(int index, ::google::protobuf::uint64 value);
+  void add_bloomfilter(::google::protobuf::uint64 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      bloomfilter() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_bloomfilter();
+
+  // optional bytes src_node_id = 1;
+  bool has_src_node_id() const;
+  void clear_src_node_id();
+  static const int kSrcNodeIdFieldNumber = 1;
+  const ::std::string& src_node_id() const;
+  void set_src_node_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_src_node_id(::std::string&& value);
+  #endif
+  void set_src_node_id(const char* value);
+  void set_src_node_id(const void* value, size_t size);
+  ::std::string* mutable_src_node_id();
+  ::std::string* release_src_node_id();
+  void set_allocated_src_node_id(::std::string* src_node_id);
+
+  // optional bytes des_node_id = 2;
+  bool has_des_node_id() const;
+  void clear_des_node_id();
+  static const int kDesNodeIdFieldNumber = 2;
+  const ::std::string& des_node_id() const;
+  void set_des_node_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_des_node_id(::std::string&& value);
+  #endif
+  void set_des_node_id(const char* value);
+  void set_des_node_id(const void* value, size_t size);
+  ::std::string* mutable_des_node_id();
+  ::std::string* release_des_node_id();
+  void set_allocated_des_node_id(::std::string* des_node_id);
+
+  // optional bytes add_field2 = 13;
+  bool has_add_field2() const;
+  void clear_add_field2();
+  static const int kAddField2FieldNumber = 13;
+  const ::std::string& add_field2() const;
+  void set_add_field2(const ::std::string& value);
+  #if LANG_CXX11
+  void set_add_field2(::std::string&& value);
+  #endif
+  void set_add_field2(const char* value);
+  void set_add_field2(const void* value, size_t size);
+  ::std::string* mutable_add_field2();
+  ::std::string* release_add_field2();
+  void set_allocated_add_field2(::std::string* add_field2);
+
+  // optional .bench.protobuf.GossipParams gossip = 11;
+  bool has_gossip() const;
+  void clear_gossip();
+  static const int kGossipFieldNumber = 11;
+  const ::bench::protobuf::GossipParams& gossip() const;
+  ::bench::protobuf::GossipParams* release_gossip();
+  ::bench::protobuf::GossipParams* mutable_gossip();
+  void set_allocated_gossip(::bench::protobuf::GossipParams* gossip);
+
+  // optional uint32 type = 3;
+  bool has_type() const;
+  void clear_type();
+  static const int kTypeFieldNumber = 3;
+  ::google::protobuf::uint32 type() const;
+  void set_type(::google::protobuf::uint32 value);
+
+  // optional uint32 id = 5;
+  bool has_id() const;
+  void clear_id();
+  static const int kIdFieldNumber = 5;
+  ::google::protobuf::uint32 id() const;
+  void set_id(::google::protobuf::uint32 value);
+
+  // optional uint32 hop_num = 6;
+  bool has_hop_num() const;
+  void clear_hop_num();
+  static const int kHopNumFieldNumber = 6;
+  ::google::protobuf::uint32 hop_num() const;
+  void set_hop_num(::google::protobuf::uint32 value);
+
+  // optional bool broadcast = 9;
+  bool has_broadcast() const;
+  void clear_broadcast();
+  static const int kBroadcastFieldNumber = 9;
+  bool broadcast() const;
+  void set_broadcast(bool value);
+
+  // optional uint32 priority = 10;
+  bool has_priority() const;
+  void clear_priority();
+  static const int kPriorityFieldNumber = 10;
+  ::google::protobuf::uint32 priority() const;
+  void set_priority(::google::protobuf::uint32 value);
+
+  // optional uint32 add_field1 = 12;
+  bool has_add_field1() const;
+  void clear_add_field1();
+  static const int kAddField1FieldNumber = 12;
+  ::google::protobuf::uint32 add_field1() const;
+  void set_add_field1(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:bench.protobuf.RoutingMessage_Add_Delete_Fields)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > bloomfilter_;
+  ::google::protobuf::internal::ArenaStringPtr src_node_id_;
+  ::google::protobuf::internal::ArenaStringPtr des_node_id_;
+  ::google::protobuf::internal::ArenaStringPtr add_field2_;
+  ::bench::protobuf::GossipParams* gossip_;
+  ::google::protobuf::uint32 type_;
+  ::google::protobuf::uint32 id_;
+  ::google::protobuf::uint32 hop_num_;
+  bool broadcast_;
+  ::google::protobuf::uint32 priority_;
+  ::google::protobuf::uint32 add_field1_;
   friend struct ::TableStruct_bench_2eproto;
 };
 // ===================================================================
@@ -545,19 +780,19 @@ inline void GossipParams::set_stop_times(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:bench.protobuf.GossipParams.stop_times)
 }
 
-// optional int32 gossip_type = 3;
+// optional uint32 gossip_type = 3;
 inline bool GossipParams::has_gossip_type() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void GossipParams::clear_gossip_type() {
-  gossip_type_ = 0;
+  gossip_type_ = 0u;
   _has_bits_[0] &= ~0x00000010u;
 }
-inline ::google::protobuf::int32 GossipParams::gossip_type() const {
+inline ::google::protobuf::uint32 GossipParams::gossip_type() const {
   // @@protoc_insertion_point(field_get:bench.protobuf.GossipParams.gossip_type)
   return gossip_type_;
 }
-inline void GossipParams::set_gossip_type(::google::protobuf::int32 value) {
+inline void GossipParams::set_gossip_type(::google::protobuf::uint32 value) {
   _has_bits_[0] |= 0x00000010u;
   gossip_type_ = value;
   // @@protoc_insertion_point(field_set:bench.protobuf.GossipParams.gossip_type)
@@ -879,19 +1114,19 @@ inline void RoutingMessage::set_allocated_des_node_id(::std::string* des_node_id
   // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage.des_node_id)
 }
 
-// optional int32 type = 3;
+// optional uint32 type = 3;
 inline bool RoutingMessage::has_type() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void RoutingMessage::clear_type() {
-  type_ = 0;
+  type_ = 0u;
   _has_bits_[0] &= ~0x00000010u;
 }
-inline ::google::protobuf::int32 RoutingMessage::type() const {
+inline ::google::protobuf::uint32 RoutingMessage::type() const {
   // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage.type)
   return type_;
 }
-inline void RoutingMessage::set_type(::google::protobuf::int32 value) {
+inline void RoutingMessage::set_type(::google::protobuf::uint32 value) {
   _has_bits_[0] |= 0x00000010u;
   type_ = value;
   // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage.type)
@@ -1126,9 +1361,382 @@ inline void RoutingMessage::set_allocated_gossip(::bench::protobuf::GossipParams
   // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage.gossip)
 }
 
+// -------------------------------------------------------------------
+
+// RoutingMessage_Add_Delete_Fields
+
+// optional bytes src_node_id = 1;
+inline bool RoutingMessage_Add_Delete_Fields::has_src_node_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_src_node_id() {
+  src_node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& RoutingMessage_Add_Delete_Fields::src_node_id() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+  return src_node_id_.GetNoArena();
+}
+inline void RoutingMessage_Add_Delete_Fields::set_src_node_id(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000001u;
+  src_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+}
+#if LANG_CXX11
+inline void RoutingMessage_Add_Delete_Fields::set_src_node_id(::std::string&& value) {
+  _has_bits_[0] |= 0x00000001u;
+  src_node_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+}
+#endif
+inline void RoutingMessage_Add_Delete_Fields::set_src_node_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  _has_bits_[0] |= 0x00000001u;
+  src_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+}
+inline void RoutingMessage_Add_Delete_Fields::set_src_node_id(const void* value, size_t size) {
+  _has_bits_[0] |= 0x00000001u;
+  src_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::mutable_src_node_id() {
+  _has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_mutable:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+  return src_node_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::release_src_node_id() {
+  // @@protoc_insertion_point(field_release:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+  if (!has_src_node_id()) {
+    return NULL;
+  }
+  _has_bits_[0] &= ~0x00000001u;
+  return src_node_id_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RoutingMessage_Add_Delete_Fields::set_allocated_src_node_id(::std::string* src_node_id) {
+  if (src_node_id != NULL) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  src_node_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), src_node_id);
+  // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage_Add_Delete_Fields.src_node_id)
+}
+
+// optional bytes des_node_id = 2;
+inline bool RoutingMessage_Add_Delete_Fields::has_des_node_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_des_node_id() {
+  des_node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline const ::std::string& RoutingMessage_Add_Delete_Fields::des_node_id() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+  return des_node_id_.GetNoArena();
+}
+inline void RoutingMessage_Add_Delete_Fields::set_des_node_id(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000002u;
+  des_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+}
+#if LANG_CXX11
+inline void RoutingMessage_Add_Delete_Fields::set_des_node_id(::std::string&& value) {
+  _has_bits_[0] |= 0x00000002u;
+  des_node_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+}
+#endif
+inline void RoutingMessage_Add_Delete_Fields::set_des_node_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  _has_bits_[0] |= 0x00000002u;
+  des_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+}
+inline void RoutingMessage_Add_Delete_Fields::set_des_node_id(const void* value, size_t size) {
+  _has_bits_[0] |= 0x00000002u;
+  des_node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::mutable_des_node_id() {
+  _has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_mutable:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+  return des_node_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::release_des_node_id() {
+  // @@protoc_insertion_point(field_release:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+  if (!has_des_node_id()) {
+    return NULL;
+  }
+  _has_bits_[0] &= ~0x00000002u;
+  return des_node_id_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RoutingMessage_Add_Delete_Fields::set_allocated_des_node_id(::std::string* des_node_id) {
+  if (des_node_id != NULL) {
+    _has_bits_[0] |= 0x00000002u;
+  } else {
+    _has_bits_[0] &= ~0x00000002u;
+  }
+  des_node_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), des_node_id);
+  // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage_Add_Delete_Fields.des_node_id)
+}
+
+// optional uint32 type = 3;
+inline bool RoutingMessage_Add_Delete_Fields::has_type() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_type() {
+  type_ = 0u;
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline ::google::protobuf::uint32 RoutingMessage_Add_Delete_Fields::type() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.type)
+  return type_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_type(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000010u;
+  type_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.type)
+}
+
+// optional uint32 id = 5;
+inline bool RoutingMessage_Add_Delete_Fields::has_id() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_id() {
+  id_ = 0u;
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline ::google::protobuf::uint32 RoutingMessage_Add_Delete_Fields::id() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.id)
+  return id_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_id(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000020u;
+  id_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.id)
+}
+
+// optional uint32 hop_num = 6;
+inline bool RoutingMessage_Add_Delete_Fields::has_hop_num() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_hop_num() {
+  hop_num_ = 0u;
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline ::google::protobuf::uint32 RoutingMessage_Add_Delete_Fields::hop_num() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.hop_num)
+  return hop_num_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_hop_num(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000040u;
+  hop_num_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.hop_num)
+}
+
+// repeated uint64 bloomfilter = 8;
+inline int RoutingMessage_Add_Delete_Fields::bloomfilter_size() const {
+  return bloomfilter_.size();
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_bloomfilter() {
+  bloomfilter_.Clear();
+}
+inline ::google::protobuf::uint64 RoutingMessage_Add_Delete_Fields::bloomfilter(int index) const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.bloomfilter)
+  return bloomfilter_.Get(index);
+}
+inline void RoutingMessage_Add_Delete_Fields::set_bloomfilter(int index, ::google::protobuf::uint64 value) {
+  bloomfilter_.Set(index, value);
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.bloomfilter)
+}
+inline void RoutingMessage_Add_Delete_Fields::add_bloomfilter(::google::protobuf::uint64 value) {
+  bloomfilter_.Add(value);
+  // @@protoc_insertion_point(field_add:bench.protobuf.RoutingMessage_Add_Delete_Fields.bloomfilter)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+RoutingMessage_Add_Delete_Fields::bloomfilter() const {
+  // @@protoc_insertion_point(field_list:bench.protobuf.RoutingMessage_Add_Delete_Fields.bloomfilter)
+  return bloomfilter_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+RoutingMessage_Add_Delete_Fields::mutable_bloomfilter() {
+  // @@protoc_insertion_point(field_mutable_list:bench.protobuf.RoutingMessage_Add_Delete_Fields.bloomfilter)
+  return &bloomfilter_;
+}
+
+// optional bool broadcast = 9;
+inline bool RoutingMessage_Add_Delete_Fields::has_broadcast() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_broadcast() {
+  broadcast_ = false;
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline bool RoutingMessage_Add_Delete_Fields::broadcast() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.broadcast)
+  return broadcast_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_broadcast(bool value) {
+  _has_bits_[0] |= 0x00000080u;
+  broadcast_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.broadcast)
+}
+
+// optional uint32 priority = 10;
+inline bool RoutingMessage_Add_Delete_Fields::has_priority() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_priority() {
+  priority_ = 0u;
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline ::google::protobuf::uint32 RoutingMessage_Add_Delete_Fields::priority() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.priority)
+  return priority_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_priority(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000100u;
+  priority_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.priority)
+}
+
+// optional .bench.protobuf.GossipParams gossip = 11;
+inline bool RoutingMessage_Add_Delete_Fields::has_gossip() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_gossip() {
+  if (gossip_ != NULL) gossip_->Clear();
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline const ::bench::protobuf::GossipParams& RoutingMessage_Add_Delete_Fields::gossip() const {
+  const ::bench::protobuf::GossipParams* p = gossip_;
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.gossip)
+  return p != NULL ? *p : *reinterpret_cast<const ::bench::protobuf::GossipParams*>(
+      &::bench::protobuf::_GossipParams_default_instance_);
+}
+inline ::bench::protobuf::GossipParams* RoutingMessage_Add_Delete_Fields::release_gossip() {
+  // @@protoc_insertion_point(field_release:bench.protobuf.RoutingMessage_Add_Delete_Fields.gossip)
+  _has_bits_[0] &= ~0x00000008u;
+  ::bench::protobuf::GossipParams* temp = gossip_;
+  gossip_ = NULL;
+  return temp;
+}
+inline ::bench::protobuf::GossipParams* RoutingMessage_Add_Delete_Fields::mutable_gossip() {
+  _has_bits_[0] |= 0x00000008u;
+  if (gossip_ == NULL) {
+    auto* p = CreateMaybeMessage<::bench::protobuf::GossipParams>(GetArenaNoVirtual());
+    gossip_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:bench.protobuf.RoutingMessage_Add_Delete_Fields.gossip)
+  return gossip_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_allocated_gossip(::bench::protobuf::GossipParams* gossip) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete gossip_;
+  }
+  if (gossip) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      gossip = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, gossip, submessage_arena);
+    }
+    _has_bits_[0] |= 0x00000008u;
+  } else {
+    _has_bits_[0] &= ~0x00000008u;
+  }
+  gossip_ = gossip;
+  // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage_Add_Delete_Fields.gossip)
+}
+
+// optional uint32 add_field1 = 12;
+inline bool RoutingMessage_Add_Delete_Fields::has_add_field1() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_add_field1() {
+  add_field1_ = 0u;
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline ::google::protobuf::uint32 RoutingMessage_Add_Delete_Fields::add_field1() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field1)
+  return add_field1_;
+}
+inline void RoutingMessage_Add_Delete_Fields::set_add_field1(::google::protobuf::uint32 value) {
+  _has_bits_[0] |= 0x00000200u;
+  add_field1_ = value;
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field1)
+}
+
+// optional bytes add_field2 = 13;
+inline bool RoutingMessage_Add_Delete_Fields::has_add_field2() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void RoutingMessage_Add_Delete_Fields::clear_add_field2() {
+  add_field2_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline const ::std::string& RoutingMessage_Add_Delete_Fields::add_field2() const {
+  // @@protoc_insertion_point(field_get:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+  return add_field2_.GetNoArena();
+}
+inline void RoutingMessage_Add_Delete_Fields::set_add_field2(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000004u;
+  add_field2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+}
+#if LANG_CXX11
+inline void RoutingMessage_Add_Delete_Fields::set_add_field2(::std::string&& value) {
+  _has_bits_[0] |= 0x00000004u;
+  add_field2_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+}
+#endif
+inline void RoutingMessage_Add_Delete_Fields::set_add_field2(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  _has_bits_[0] |= 0x00000004u;
+  add_field2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+}
+inline void RoutingMessage_Add_Delete_Fields::set_add_field2(const void* value, size_t size) {
+  _has_bits_[0] |= 0x00000004u;
+  add_field2_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::mutable_add_field2() {
+  _has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_mutable:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+  return add_field2_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RoutingMessage_Add_Delete_Fields::release_add_field2() {
+  // @@protoc_insertion_point(field_release:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+  if (!has_add_field2()) {
+    return NULL;
+  }
+  _has_bits_[0] &= ~0x00000004u;
+  return add_field2_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RoutingMessage_Add_Delete_Fields::set_allocated_add_field2(::std::string* add_field2) {
+  if (add_field2 != NULL) {
+    _has_bits_[0] |= 0x00000004u;
+  } else {
+    _has_bits_[0] &= ~0x00000004u;
+  }
+  add_field2_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), add_field2);
+  // @@protoc_insertion_point(field_set_allocated:bench.protobuf.RoutingMessage_Add_Delete_Fields.add_field2)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

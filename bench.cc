@@ -1,16 +1,8 @@
-// export LD_LIBRARY_PATH=/usr/local/lib
-// g++ -I msgpack-c/include bench.cc bench.pb.cc   -I ./  -I /usr/local/include/google/protobuf/ -L /usr/local/lib/  -std=c++11 -o bench -Wl,-Bstatic -lprotobuf -Wl,-Bdynamic -pthread
+#include "bench.h"
 
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
-#include <chrono>
 #include <memory>
-#include <random>
-#include <mutex>
-#include <algorithm>
-#include <iomanip>
+#include <iomanip> // for setw
 
 // gflags
 #include <gflags/gflags.h>
@@ -23,39 +15,14 @@
 // protobuf
 #include <bench.pb.h>
 
+#include "protobuf_compatibility.h"
+
+
 // for convenience
 using json = nlohmann::json;
 
 // 循环次数
 uint32_t bench_num = 100000;
-
-
-const char kHexAlphabet[] = "0123456789abcdef";
-const char kHexLookup[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7,  8,  9,  0,  0,  0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 11, 12, 13, 14, 15 };
-
-//the following are UBUNTU/LINUX ONLY terminal color codes.
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"      /* Black */
-#define RED     "\033[31m"      /* Red */
-#define GREEN   "\033[32m"      /* Green */
-#define YELLOW  "\033[33m"      /* Yellow */
-#define BLUE    "\033[34m"      /* Blue */
-#define MAGENTA "\033[35m"      /* Magenta */
-#define CYAN    "\033[36m"      /* Cyan */
-#define WHITE   "\033[37m"      /* White */
-#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
-#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
-#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
-#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
-#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
-#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
-#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
-#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
-
 
 std::string HexEncode(const std::string& str) {
     auto size(str.size());
@@ -65,6 +32,27 @@ std::string HexEncode(const std::string& str) {
         hex_output[j++] = kHexAlphabet[static_cast<unsigned char>(str[i]) % 16];
     }
     return hex_output;
+}
+
+std::string HexSubstr(const std::string& str) {
+    size_t non_hex_size(str.size());
+    if (non_hex_size < 7)
+        return HexEncode(str);
+
+    std::string hex(14, 0);
+    size_t non_hex_index(0), hex_index(0);
+    for (; non_hex_index != 3; ++non_hex_index) {
+        hex[hex_index++] = kHexAlphabet[static_cast<unsigned char>(str[non_hex_index]) / 16];
+        hex[hex_index++] = kHexAlphabet[static_cast<unsigned char>(str[non_hex_index]) % 16];
+    }
+    hex[hex_index++] = '.';
+    hex[hex_index++] = '.';
+    non_hex_index = non_hex_size - 3;
+    for (; non_hex_index != non_hex_size; ++non_hex_index) {
+        hex[hex_index++] = kHexAlphabet[static_cast<unsigned char>(str[non_hex_index]) / 16];
+        hex[hex_index++] = kHexAlphabet[static_cast<unsigned char>(str[non_hex_index]) % 16];
+    }
+    return hex;
 }
 
 std::string HexDecode(const std::string& str) {
@@ -105,106 +93,11 @@ std::mutex& random_number_generator_mutex() {
     return random_number_generator_mutex;
 }
 
-template <typename String>
-String GetRandomString(size_t size) {
-    std::uniform_int_distribution<> distribution(0, 255);
-    String random_string(size, 0);
-    {
-        std::lock_guard<std::mutex> lock(random_number_generator_mutex());
-        std::generate(random_string.begin(), random_string.end(),
-            [&] { return distribution(random_number_generator()); });
-    }
-    return random_string;
-}
-
-template <typename IntType>
-IntType RandomInt() {
-  static std::uniform_int_distribution<IntType> distribution(std::numeric_limits<IntType>::min(),
-          std::numeric_limits<IntType>::max());
-  std::lock_guard<std::mutex> lock(random_number_generator_mutex());
-  return distribution(random_number_generator());
-}
 
 std::string RandomString(size_t size) { return GetRandomString<std::string>(size); }
 uint32_t RandomUint32() { return RandomInt<uint32_t>(); }
 uint64_t RandomUint64() { return RandomInt<uint64_t>(); }
 
-
-
-class GossipParams;
-class RoutingMessage;
-
-class GossipParams {
-public:
-    uint32_t               neighber_count;
-    uint32_t               stop_times;
-    uint32_t               gossip_type;
-    uint32_t               max_hop_num;
-    std::string            header_hash;
-    std::string            block;
-    uint32_t               msg_hash;
-    bool                   allow_up;
-    bool                   allow_low;
-public:
-    void print() {
-        std::cout <<  "GossipParams:\n"
-            <<  "neighber_count:"            <<    neighber_count            << "\n"
-            <<  "stop_times:"                <<    stop_times                << "\n"
-            <<  "gossip_type:"               <<    gossip_type               << "\n"
-            <<  "max_hop_num:"               <<    max_hop_num               << "\n"
-            <<  "header_hash:"               <<    HexEncode(header_hash)    << "\n"
-            <<  "block:"                     <<    HexEncode(block)          << "\n"
-            <<  "msg_hash:"                  <<    msg_hash                  << "\n"
-            <<  "allow_up:"                  <<    allow_up                  << "\n"
-            <<  "allow_low:"                 <<    allow_low                 << "\n"
-            <<  std::endl;
-    }
-public:
-    MSGPACK_DEFINE(
-            neighber_count, stop_times, gossip_type,
-            max_hop_num, header_hash, block, msg_hash,
-            allow_up, allow_low);
-
-};
-
-
-class RoutingMessage {
-public:
-    std::string            src_node_id;
-    std::string            des_node_id;
-    uint32_t               type;
-    std::string            data;
-    uint32_t               id;
-    uint32_t               hop_num;
-    bool                   is_root;
-    std::vector<uint64_t>  bloomfilter;
-    bool                   broadcast;
-    uint32_t               priority;
-    GossipParams           gossip;
-
-public:
-    void print() {
-        std::cout <<  "RoutingMessage:\n" 
-            << "src_node_id:"       <<    HexEncode(src_node_id)      << "\n"
-            <<  "des_node_id:"      <<    HexEncode(des_node_id)      << "\n"
-            <<  "type:"             <<    type                        << "\n"
-            <<  "data:"             <<    HexEncode(data)             << "\n"
-            <<  "id:"               <<    id                          << "\n"
-            <<  "hop_num:"          <<    hop_num                     << "\n"
-            <<  "is_root:"          <<    is_root                     << "\n"
-            <<  "broadcast:"        <<    broadcast                   << "\n"
-            <<  "priority:"         <<    priority                    << "\n"
-            <<  std::endl;
-
-        gossip.print();
-    }
-
-public:
-	MSGPACK_DEFINE(
-            src_node_id,  des_node_id, type, data,
-            id, hop_num, is_root, bloomfilter, broadcast,
-            priority, gossip);
-};
 
 
 ::bench::protobuf::RoutingMessage bench_protobuf_init_message(uint32_t binary_data_size = 300) {
@@ -231,6 +124,7 @@ public:
     ggossip->set_msg_hash(72992300);
     ggossip->set_allow_up(true);
     ggossip->set_allow_low(false);
+
     return gmessage;
 }
 
@@ -497,17 +391,24 @@ json bench_msgpack_run(uint32_t binary_data_size = 300) {
 }
 
 
+DEFINE_string(log, "/tmp/", "xbase log file");
 DEFINE_bool(simple, false, "just run simple test");
 DEFINE_int32(binary_size, 200, "chain binary size");
 DEFINE_int32(bench_num, 100000, "bench num, than get avg value");
 DEFINE_bool(bench, false, "do benchmark test and print to stdout");
 DEFINE_bool(dump, false, "do more benchmark and dump result to benchmark.json");
 DEFINE_int32(dump_num, 30, "dump test chain binary size, from 100 Bytes begin, next will more 100Bytes");
+DEFINE_bool(comp, false, "compatibility test for protobuf");
 
 int main(int argc ,char* argv[]) {
     gflags::ParseCommandLineFlags(&argc, &argv, true);
 
     bench_num = FLAGS_bench_num;
+
+    if (FLAGS_comp) {
+        protobuf_compatibility();
+        return 0;
+    }
 
     if (FLAGS_simple) {
         uint32_t binary_size = FLAGS_binary_size;
@@ -518,6 +419,7 @@ int main(int argc ,char* argv[]) {
         std::cout << GREEN << "########################################################################" << std::endl;
         bench_protobuf_run(binary_size);
         std::cout << GREEN << "########################################################################" << std::endl;
+
         return 0;
     }
 
@@ -544,6 +446,9 @@ int main(int argc ,char* argv[]) {
         std::cout << WHITE << "----------------------------" << GREEN << std::endl;
         bench_protobuf_run(50 * 1024);
         std::cout << GREEN << "########################################################################" << std::endl;
+
+
+        std::cout << BLUE << "########################################################################" << std::endl;
         return 0;
     }
 
