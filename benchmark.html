@@ -75,6 +75,10 @@ Highcharts.setOptions({ global: { useUTC: false } });
                  //console.log(data['msgpack']);
 
                  var chart = Highcharts.chart(divname, {
+                     chart: {
+		             	type: 'line',
+		             	zoomType: 'x'
+		             },
                      title: {
                          text: title_text
                      },
